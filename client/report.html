@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Incident - SafeGuard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1><i class="fas fa-shield-alt"></i> SafeGuard</h1>
+        </div>
+        <nav>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="safety-map.html">Safety Map</a></li>
+                <li><a href="report.html" class="active">Report Incident</a></li>
+                <li><a href="sos.html">SOS</a></li>
+                <li><a href="tips.html">Safety Tips</a></li>
+                <li><a href="community.html">Community</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>Report an Incident</h1>
+            <p>Your report helps keep others safe and contributes to our safety map</p>
+        </section>
+
+        <section class="section-padding">
+            <div class="container">
+                <div class="form-container">
+                    <form id="reportForm">
+                        <div class="form-group">
+                            <label for="incidentType">Type of Incident*</label>
+                            <select id="incidentType" class="form-control" required>
+                                <option value="">Select Incident Type</option>
+                                <option value="harassment">Verbal Harassment</option>
+                                <option value="following">Following/Stalking</option>
+                                <option value="assault">Physical Assault</option>
+                                <option value="catcalling">Catcalling</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="incidentDate">Date of Incident*</label>
+                            <input type="date" id="incidentDate" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="incidentTime">Time of Incident*</label>
+                            <input type="time" id="incidentTime" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="incidentLocation">Location*</label>
+                            <input type="text" id="incidentLocation" class="form-control" placeholder="Enter street address or landmark" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="incidentDescription">Description of Incident*</label>
+                            <textarea id="incidentDescription" class="form-control" placeholder="Please describe what happened in as much detail as you feel comfortable sharing" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="perpetratorDescription">Description of Perpetrator(s) (if applicable)</label>
+                            <textarea id="perpetratorDescription" class="form-control" placeholder="Any details you can provide about the person(s) involved"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="policeReport">
+                                <label for="policeReport">I have reported this incident to the police</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="anonymous" checked>
+                                <label for="anonymous">Keep my report anonymous</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactInfo">Contact Information (optional)</label>
+                            <input type="email" id="contactInfo" class="form-control" placeholder="Your email (only used if follow up is needed)">
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="consent" required>
+                                <label for="consent">I consent to having this information stored and used to improve safety in the community*</label>
+                            </div>
+                        </div>
+
+                        <p><small>Fields marked with * are required</small></p>
+
+                        <button type="submit" class="btn primary-btn">Submit Report</button>
+                    </form>
+                </div>
+
+                <div class="info-box">
+                    <h3>Important Information</h3>
+                    <p>Your report helps create a safer community. All reports are anonymous by default unless you choose to share your contact information.</p>
+                    <p>In case of emergency, please contact local authorities immediately or use our <a href="sos.html">SOS feature</a> to alert your emergency contacts.</p>
+                    <p>For support resources, please visit our <a href="tips.html">Safety Tips</a> page.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3><i class="fas fa-shield-alt"></i> SafeGuard</h3>
+                <p>A platform dedicated to improving women's safety through community-driven reporting, resources, and support.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="safety-map.html">Safety Map</a></li>
+                    <li><a href="report.html">Report Incident</a></li>
+                    <li><a href="sos.html">SOS</a></li>
+                    <li><a href="tips.html">Safety Tips</a></li>
+                    <li><a href="community.html">Community</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-envelope"></i> support@safeguard.com</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Safety Street, Secure City</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 SafeGuard. All rights reserved.</p>
+            <p>
+                <a href="#">Privacy Policy</a> | 
+                <a href="#">Terms of Service</a> | 
+                <a href="#">Support</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
