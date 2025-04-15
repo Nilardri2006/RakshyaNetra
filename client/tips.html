@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Safety Tips - SafeGuard</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1><i class="fas fa-shield-alt"></i> SafeGuard</h1>
+        </div>
+        <nav>
+            <div class="hamburger" aria-label="Toggle menu">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="safety-map.html">Safety Map</a></li>
+                <li><a href="report.html">Report Incident</a></li>
+                <li><a href="sos.html">SOS</a></li>
+                <li><a href="tips.html" class="active">Safety Tips</a></li>
+                <li><a href="community.html">Community</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>Safety Tips & Resources</h1>
+            <p>Knowledge is power. Learn how to stay safe in various situations.</p>
+        </section>
+
+        <section class="section-padding">
+            <div class="container">
+
+                <!-- Filter Buttons -->
+                <div class="tips-filter">
+                    <h3>Filter by Category</h3>
+                    <div class="filter-buttons">
+                        <button class="btn filter-btn active" data-filter="all">All</button>
+                        <button class="btn filter-btn" data-filter="public">Public Spaces</button>
+                        <button class="btn filter-btn" data-filter="digital">Digital Safety</button>
+                        <button class="btn filter-btn" data-filter="travel">Travel Safety</button>
+                        <button class="btn filter-btn" data-filter="defense">Self Defense</button>
+                        <button class="btn filter-btn" data-filter="legal">Legal Rights</button>
+                    </div>
+                </div>
+
+                <!-- Tip Cards -->
+                <div class="tips-container">
+                    <div class="tip-card" data-category="public">
+                        <h3>Stay Aware in Crowded Areas</h3>
+                        <p>Always keep your belongings close and avoid using your phone while walking alone.</p>
+                    </div>
+
+                    <div class="tip-card" data-category="digital">
+                        <h3>Secure Your Online Presence</h3>
+                        <p>Use strong, unique passwords and enable two-factor authentication on important accounts.</p>
+                    </div>
+
+                    <div class="tip-card" data-category="travel">
+                        <h3>Share Your Travel Plans</h3>
+                        <p>Let a trusted contact know your destination and expected arrival time.</p>
+                    </div>
+
+                    <div class="tip-card" data-category="defense">
+                        <h3>Carry Self-Defense Tools</h3>
+                        <p>Learn how to use pepper spray, a whistle, or a personal alarm for added security.</p>
+                    </div>
+                </div>
+
+                <!-- Emergency Resources -->
+                <div class="emergency-resources">
+                    <h2>Emergency Resources</h2>
+                    <div class="resource-cards">
+                        <div class="resource-card">
+                            <h3>National Emergency</h3>
+                            <p>For immediate emergency assistance</p>
+                            <p class="phone-number"><a href="tel:911">911</a></p>
+                        </div>
+                        <div class="resource-card">
+                            <h3>National Sexual Assault Hotline</h3>
+                            <p>Free confidential support 24/7</p>
+                            <p class="phone-number"><a href="tel:18006564673">1-800-656-HOPE (4673)</a></p>
+                        </div>
+                        <div class="resource-card">
+                            <h3>National Domestic Violence Hotline</h3>
+                            <p>Crisis intervention and support</p>
+                            <p class="phone-number"><a href="tel:18007997233">1-800-799-SAFE (7233)</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <h2>Knowledge is Power</h2>
+            <p>Share these safety tips with others to help create a safer community for everyone.</p>
+            <div class="social-sharing">
+                <a href="#" class="btn secondary-btn"><i class="fas fa-share-alt"></i> Share Safety Tips</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3><i class="fas fa-shield-alt"></i> SafeGuard</h3>
+                <p>A platform dedicated to improving women's safety through community-driven reporting, resources, and support.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 SafeGuard. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
