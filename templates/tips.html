@@ -6,7 +6,7 @@
     <title>Safety Tips - RakshyaNetra</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
-    <script src="<script src="{{ url_for('static', filename='js/script.js') }}"></script>.js" defer></script>
+    <script src="<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </head>
 <body>
     <header>
@@ -23,6 +23,7 @@
                 <li><a href="{{ url_for('home') }}">Home</a></li>
                 <li><a href="{{ url_for('safety_map') }}">Safety Map</a></li>
                 <li><a href="{{ url_for('report') }}">Report Incident</a></li>
+                <li><a href="{{ url_for('show_incidents') }}">View Reports</a></li>
                 <li><a href="{{ url_for('sos') }}">SOS</a></li>
                 <li><a href="{{ url_for('tips') }}">Safety Tips</a></li>
                 <li><a href="{{ url_for('community') }}">Community</a></li>

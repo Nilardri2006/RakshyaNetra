@@ -4,13 +4,141 @@
     <meta charset="UTF-8">
     <title>Reported Incidents</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <style>
-        table { width: 100%; border-collapse: collapse; margin-top: 2em; }
-        th, td { border: 1px solid #ccc; padding: 0.5em; text-align: left; }
-        th { background: #f5f5f5; }
+        :root {
+            /* Primary Colors */
+            --primary-color: #4a6fa5;
+            --primary-dark: #345281;
+            --primary-light: #6e8cbc;
+
+            /* Secondary Colors */
+            --secondary-color: #f8c7cc;
+            --secondary-dark: #e7a2aa;
+            --secondary-light: #fce3e6;
+
+            /* Accent Colors */
+            --accent-color: #7acca4;
+            --accent-dark: #5eae87;
+            --accent-light: #9fdebb;
+
+            /* Emergency Color */
+            --emergency-color: #e63946;
+            --emergency-dark: #c5232f;
+            --emergency-light: #f27179;
+
+            /* Neutral Colors */
+            --dark: #2b2d42;
+            --medium-dark: #8d99ae;
+            --medium-light: #edf2f4;
+            --light: #ffffff;
+
+            /* Fonts */
+            --main-font: 'Nunito', sans-serif;
+            --heading-font: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--main-font);
+            background-color: var(--medium-light);
+            color: var(--dark);
+            padding: 2rem;
+        }
+
+        h1 {
+            font-family: var(--heading-font);
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+        }
+
+        thead {
+            background-color: var(--primary-color);
+            color: var(--light);
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: var(--medium-light);
+        }
+
+        tbody tr:hover {
+            background-color: var(--accent-light);
+            transition: background-color 0.3s ease;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 2rem;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: var(--main-font);
+            background-color: var(--primary-color);
+            color: var(--light);
+            padding: 0.6rem 1.4rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: var(--primary-dark);
+        }
+
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tbody tr {
+                background-color: var(--light);
+                margin-bottom: 1rem;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                padding: 1rem;
+            }
+
+            td {
+                padding: 0.5rem 0;
+                position: relative;
+            }
+
+            td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                color: var(--primary-color);
+                display: block;
+                margin-bottom: 0.25rem;
+            }
+        }
     </style>
 </head>
 <body>
+    
+
     <h1>Reported Incidents</h1>
     <table>
         <thead>
