@@ -1,9 +1,52 @@
 from flask import Flask, render_template, request, jsonify
 from pymongo import MongoClient
+from twilio.rest import Client
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 client = MongoClient('localhost', 27017)
 db = client['womens_safety']
+
+# Twilio setup
+twilio_client = Client(os.getenv('TWILIO_ACCOUNT_SID'), os.getenv('TWILIO_AUTH_TOKEN'))
+
+@app.route('/api/trigger-sos', methods=['POST'])
+def trigger_sos():
+    try:
+        data = request.get_json()
+        contacts = data.get('contacts', [])
+        user_name = data.get('user_name', 'User')
+        location = data.get('location', 'Unknown location')
+        
+        if not contacts:
+            return jsonify({"error": "No emergency contacts provided"}), 400
+
+        message = f"🚨 EMERGENCY ALERT 🚨 HELP!! \n{user_name} needs immediate help!\nLast known location: {location}"
+        
+        errors = []
+        for number in contacts:
+            try:
+                twilio_client.messages.create(
+                    body=message,
+                    from_=os.getenv('TWILIO_PHONE_NUMBER'),
+                    to=number
+                )
+            except Exception as e:
+                errors.append(str(e))
+        
+        if errors:
+            return jsonify({
+                "message": f"Sent to {len(contacts)-len(errors)}/{len(contacts)} contacts",
+                "errors": errors
+            }), 207
+            
+        return jsonify({"message": "Alerts sent to all contacts!"}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # Routes to serve HTML pages
 @app.route('/')
@@ -57,10 +100,6 @@ def heatmap_data():
         # Add more sample data points
     ])
 
-@app.route('/api/trigger-sos', methods=['POST'])
-def trigger_sos():
-    # Add SMS/email logic here
-    return jsonify({"message": "Emergency alerts sent!"}), 200
 
 if __name__ == '__main__':
     app.run(debug=True)

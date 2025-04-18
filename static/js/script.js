@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+
     // Mobile Navigation
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
@@ -18,20 +20,55 @@ document.addEventListener('DOMContentLoaded', function () {
     const sosButton = document.querySelector('.sos-button');
     if (sosButton) {
         sosButton.addEventListener('click', function () {
-            // Send POST request to Flask backend
-            fetch('/api/trigger-sos', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: "EMERGENCY: I need immediate help!" })
-            })
+            // Get emergency contacts from form
+            const contacts = [];
+            document.querySelectorAll('.emergency-contact').forEach(input => {
+                if (input.value.trim()) contacts.push(input.value.trim());
+            });
+
+            // Get user details
+            const userName = document.getElementById('user-name').value || 'Anonymous';
+
+            // Get location
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    sendAlert({
+                        contacts: contacts,
+                        user_name: userName,
+                        location: `https://maps.google.com/?q=${position.coords.latitude},${position.coords.longitude}`
+                    });
+                }, () => {
+                    sendAlert({
+                        contacts: contacts,
+                        user_name: userName,
+                        location: "Location unavailable"
+                    });
+                });
+            } else {
+                sendAlert({
+                    contacts: contacts,
+                    user_name: userName,
+                    location: "Location service blocked"
+                });
+            }
+        });
+    }
+
+    function sendAlert(data) {
+        fetch('/api/trigger-sos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
             .then(response => response.json())
             .then(data => {
-                alert(data.message || 'Emergency alert sent to your emergency contacts!');
+                if (data.errors) {
+                    alert(`Partial success: ${data.message}\nErrors: ${data.errors.join(', ')}`);
+                } else {
+                    alert(data.message);
+                }
             })
-            .catch(() => {
-                alert('Failed to send emergency alert.');
-            });
-        });
+            .catch(() => alert('Failed to send alerts'));
     }
 
     // Form validation and backend submission for standalone report page
@@ -61,14 +98,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.message || 'Your report has been submitted successfully!');
-                reportForm.reset();
-            })
-            .catch(() => {
-                alert('Failed to submit report.');
-            });
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message || 'Your report has been submitted successfully!');
+                    reportForm.reset();
+                })
+                .catch(() => {
+                    alert('Failed to submit report.');
+                });
         });
     }
 });
@@ -192,14 +229,14 @@ function showReportIncidentForm(location) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message || 'Incident reported successfully!');
-            modal.style.display = 'none';
-        })
-        .catch(() => {
-            alert('Failed to report incident.');
-        });
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message || 'Incident reported successfully!');
+                modal.style.display = 'none';
+            })
+            .catch(() => {
+                alert('Failed to report incident.');
+            });
     };
 }
 

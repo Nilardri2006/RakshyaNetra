@@ -36,69 +36,28 @@
     <main>
         <section class="page-header emergency-header">
             <h1>Emergency SOS</h1>
-            <p>Press the button below to alert your emergency contacts with your location</p>
-        </section>
+            <p>Press the button below to alert your emergency contacts with your location.</p>
 
-        <section class="section-padding">
-            <div class="container">
-                <div class="sos-button-container">
-                    <div class="sos-button" id="sosButton">
-                        SOS
-                    </div>
-                    <p>Press and hold for 3 seconds to activate</p>
-                </div>
+            <form id="sos-form">
+                <label for="user-name">Your Name (optional):</label>
+                <input type="text" id="user-name" placeholder="Your name">
 
-                <div class="form-container" id="emergency-contacts">
-                    <h2>Emergency Contacts</h2>
-                    <p>Add your emergency contacts below. These contacts will be notified when you press the SOS button.
-                    </p>
+                <label>Emergency Contacts (phone numbers in international format):</label>
+                <input type="tel" class="emergency-contact" placeholder="+911234567890" required>
+                <input type="tel" class="emergency-contact" placeholder="+919876543210">
+                
 
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="contactName">Contact Name*</label>
-                            <input type="text" id="contactName" class="form-control" placeholder="Enter contact name"
-                                required>
-                        </div>
+                <button type="button" class="sos-button"
+                style="background:red;color:white;font-size:1.2em;margin-top:1em;">
+                    SEND EMERGENCY ALERT
+                </button>
+            </form>
 
-                        <div class="form-group">
-                            <label for="contactPhone">Contact Phone Number*</label>
-                            <input type="tel" id="contactPhone" class="form-control" placeholder="Enter phone number"
-                                required>
-                        </div>
+            <p style="margin-top:2em;">
+                <strong>How it works:</strong> When you press the SOS button, your emergency contacts will receive an
+                SMS with your name and current location.
+            </p>
 
-                        <div class="form-group">
-                            <label for="contactRelation">Relationship*</label>
-                            <select id="contactRelation" class="form-control" required>
-                                <option value="">Select Relationship</option>
-                                <option value="family">Family Member</option>
-                                <option value="friend">Friend</option>
-                                <option value="partner">Partner</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-
-                        <button type="submit" class="btn secondary-btn">Add Contact</button>
-                    </form>
-
-                    <div class="contacts-list">
-                        <h3>Your Emergency Contacts</h3>
-                        <p class="empty-list">No emergency contacts added yet. Add contacts above.</p>
-                        <!-- Contact list will be populated by JavaScript -->
-                    </div>
-                </div>
-
-                <div class="info-box">
-                    <h3>Important Information</h3>
-                    <p>When you press the SOS button, the following will happen:</p>
-                    <ul>
-                        <li>Your current location will be sent to your emergency contacts</li>
-                        <li>A pre-written message will be sent to notify them you may be in danger</li>
-                        <li>Your phone will automatically start recording audio (if permitted)</li>
-                    </ul>
-                    <p><strong>Remember:</strong> In case of immediate danger, always try to call local emergency
-                        services (like 911) first if possible.</p>
-                </div>
-            </div>
         </section>
     </main>
 
