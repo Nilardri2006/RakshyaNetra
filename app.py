@@ -1,0 +1,59 @@
+from flask import Flask, render_template, request, jsonify
+from pymongo import MongoClient
+
+app = Flask(__name__)
+client = MongoClient('localhost', 27017)
+db = client['womens_safety']
+
+# Routes to serve HTML pages
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/report')
+def report():
+    return render_template('report.html')
+
+@app.route('/safety-map')
+def safety_map():
+    return render_template('safety-map.html')
+
+@app.route('/tips')
+def tips():
+    return render_template('tips.html')
+
+@app.route('/community')
+def community():
+    return render_template('community.html')
+
+@app.route('/sos')
+def sos():
+    return render_template('sos.html')
+
+# API Endpoints
+@app.route('/api/report-incident', methods=['POST'])
+def report_incident():
+    data = request.get_json()
+    result = db.incidents.insert_one(data)
+    return jsonify({"message": "Incident reported", "id": str(result.inserted_id)}), 201
+
+@app.route('/api/incidents', methods=['GET'])
+def get_incidents():
+    incidents = list(db.incidents.find({}, {'_id': 0}))
+    return jsonify(incidents)
+
+@app.route('/api/heatmap-data')
+def heatmap_data():
+    return jsonify([
+        {"lat": 40.7128, "lng": -74.0060, "weight": 5},
+        {"lat": 40.715, "lng": -74.009, "weight": 3},
+        # Add more sample data points
+    ])
+
+@app.route('/api/trigger-sos', methods=['POST'])
+def trigger_sos():
+    # Add SMS/email logic here
+    return jsonify({"message": "Emergency alerts sent!"}), 200
+
+if __name__ == '__main__':
+    app.run(debug=True)
