@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Community Support - SafeGuard</title>
+    <title>Community Support -RakshyaNetra </title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <script src="{{ url_for('static', filename='js/script.js') }}"></script></head>
 <body>
     <header>
         <div class="logo">
-            <h1><i class="fas fa-shield-alt"></i> SafeGuard</h1>
+            <h1><i class="fas fa-shield-alt"></i><a href="{{ url_for('home') }}">RakshyaNetra</a></h1>
         </div>
         <nav>
             <div class="hamburger">
@@ -19,12 +19,12 @@
                 <div class="line"></div>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="safety-map.html">Safety Map</a></li>
-                <li><a href="report.html">Report Incident</a></li>
-                <li><a href="sos.html">SOS</a></li>
-                <li><a href="tips.html">Safety Tips</a></li>
-                <li><a href="community.html" class="active">Community</a></li>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('safety_map') }}">Safety Map</a></li>
+                <li><a href="{{ url_for('report') }}">Report Incident</a></li>
+                <li><a href="{{ url_for('sos') }}">SOS</a></li>
+                <li><a href="{{ url_for('tips') }}">Safety Tips</a></li>
+                <li><a href="{{ url_for('community') }}">Community</a></li>
             </ul>
         </nav>
     </header>
@@ -46,7 +46,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section about">
-                <h3><i class="fas fa-shield-alt"></i> SafeGuard</h3>
+                <h3><i class="fas fa-shield-alt"></i> RakshyaNetra</h3>
                 <p>A platform dedicated to improving women's safety through community-driven reporting, resources, and support.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-facebook"></i></a>
@@ -56,7 +56,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 SafeGuard. All rights reserved.</p>
+            <p>&copy; 2025 RakshyaNetra. All rights reserved.</p>
         </div>
     </footer>
 </body>

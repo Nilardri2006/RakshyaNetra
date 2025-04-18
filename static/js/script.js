@@ -39,33 +39,36 @@ document.addEventListener('DOMContentLoaded', function () {
     if (reportForm) {
         reportForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            if (validateForm(reportForm)) {
-                const formData = new FormData(reportForm);
-                const data = {
-                    type: formData.get('incident-type'),
-                    description: formData.get('incident-description'),
-                    location: {
-                        lat: parseFloat(formData.get('incident-lat')),
-                        lng: parseFloat(formData.get('incident-lng'))
-                    },
-                    dateTime: formData.get('incident-date')
-                };
-                fetch('/api/report-incident', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    alert(data.message || 'Your report has been submitted successfully!');
-                    reportForm.reset();
-                })
-                .catch(() => {
-                    alert('Failed to submit report.');
-                });
-            } else {
-                alert('Please fill in all required fields.');
+            // Validate consent checkbox
+            if (!document.getElementById('consent').checked) {
+                alert('You must consent to submit the report.');
+                return;
             }
+            // Collect form data
+            const data = {
+                type: document.getElementById('incidentType').value,
+                date: document.getElementById('incidentDate').value,
+                time: document.getElementById('incidentTime').value,
+                location: document.getElementById('incidentLocation').value,
+                description: document.getElementById('incidentDescription').value,
+                perpetrator: document.getElementById('perpetratorDescription').value,
+                policeReport: document.getElementById('policeReport').checked,
+                anonymous: document.getElementById('anonymous').checked,
+                contactInfo: document.getElementById('contactInfo').value
+            };
+            fetch('/api/report-incident', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message || 'Your report has been submitted successfully!');
+                reportForm.reset();
+            })
+            .catch(() => {
+                alert('Failed to submit report.');
+            });
         });
     }
 });

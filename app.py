@@ -14,6 +14,13 @@ def home():
 def report():
     return render_template('report.html')
 
+@app.route('/incidents')
+def show_incidents():
+    # Fetch all incidents from MongoDB, newest first
+    all_incidents = list(db.incidents.find().sort('_id', -1))
+    return render_template('incidents.html', incidents=all_incidents)
+
+
 @app.route('/safety-map')
 def safety_map():
     return render_template('safety-map.html')

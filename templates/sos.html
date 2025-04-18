@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emergency SOS - SafeGuard</title>
+    <title>Emergency SOS - RakshyaNetra</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script></head>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+
 <body>
     <header>
         <div class="logo">
-            <h1><i class="fas fa-shield-alt"></i> SafeGuard</h1>
+            <h1><i class="fas fa-shield-alt"></i><a href="{{ url_for('home') }}">RakshyaNetra</a></h1>
         </div>
         <nav>
             <div class="hamburger">
@@ -19,12 +22,12 @@
                 <div class="line"></div>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="safety-map.html">Safety Map</a></li>
-                <li><a href="report.html">Report Incident</a></li>
-                <li><a href="sos.html" class="active">SOS</a></li>
-                <li><a href="tips.html">Safety Tips</a></li>
-                <li><a href="community.html">Community</a></li>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('safety_map') }}">Safety Map</a></li>
+                <li><a href="{{ url_for('report') }}">Report Incident</a></li>
+                <li><a href="{{ url_for('sos') }}">SOS</a></li>
+                <li><a href="{{ url_for('tips') }}">Safety Tips</a></li>
+                <li><a href="{{ url_for('community') }}">Community</a></li>
             </ul>
         </nav>
     </header>
@@ -46,17 +49,20 @@
 
                 <div class="form-container" id="emergency-contacts">
                     <h2>Emergency Contacts</h2>
-                    <p>Add your emergency contacts below. These contacts will be notified when you press the SOS button.</p>
-                    
+                    <p>Add your emergency contacts below. These contacts will be notified when you press the SOS button.
+                    </p>
+
                     <form id="contactForm">
                         <div class="form-group">
                             <label for="contactName">Contact Name*</label>
-                            <input type="text" id="contactName" class="form-control" placeholder="Enter contact name" required>
+                            <input type="text" id="contactName" class="form-control" placeholder="Enter contact name"
+                                required>
                         </div>
 
                         <div class="form-group">
                             <label for="contactPhone">Contact Phone Number*</label>
-                            <input type="tel" id="contactPhone" class="form-control" placeholder="Enter phone number" required>
+                            <input type="tel" id="contactPhone" class="form-control" placeholder="Enter phone number"
+                                required>
                         </div>
 
                         <div class="form-group">
@@ -88,7 +94,8 @@
                         <li>A pre-written message will be sent to notify them you may be in danger</li>
                         <li>Your phone will automatically start recording audio (if permitted)</li>
                     </ul>
-                    <p><strong>Remember:</strong> In case of immediate danger, always try to call local emergency services (like 911) first if possible.</p>
+                    <p><strong>Remember:</strong> In case of immediate danger, always try to call local emergency
+                        services (like 911) first if possible.</p>
                 </div>
             </div>
         </section>
@@ -97,8 +104,9 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section about">
-                <h3><i class="fas fa-shield-alt"></i> SafeGuard</h3>
-                <p>A platform dedicated to improving women's safety through community-driven reporting, resources, and support.</p>
+                <h3><i class="fas fa-shield-alt"></i> RakshyaNetra</h3>
+                <p>A platform dedicated to improving women's safety through community-driven reporting, resources, and
+                    support.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-facebook"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
@@ -109,29 +117,30 @@
             <div class="footer-section links">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="safety-map.html">Safety Map</a></li>
-                    <li><a href="report.html">Report Incident</a></li>
-                    <li><a href="sos.html">SOS</a></li>
-                    <li><a href="tips.html">Safety Tips</a></li>
-                    <li><a href="community.html">Community</a></li>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('safety_map') }}">Safety Map</a></li>
+                    <li><a href="{{ url_for('report') }}">Report Incident</a></li>
+                    <li><a href="{{ url_for('sos') }}">SOS</a></li>
+                    <li><a href="{{ url_for('tips') }}">Safety Tips</a></li>
+                    <li><a href="{{ url_for('community') }}">Community</a></li>
                 </ul>
             </div>
             <div class="footer-section contact">
                 <h3>Contact Us</h3>
-                <p><i class="fas fa-envelope"></i> support@safeguard.com</p>
+                <p><i class="fas fa-envelope"></i> support rakshyanetra.com</p>
                 <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
                 <p><i class="fas fa-map-marker-alt"></i> 123 Safety Street, Secure City</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 SafeGuard. All rights reserved.</p>
+            <p>&copy; 2025 RakshyaNetra. All rights reserved.</p>
             <p>
-                <a href="#">Privacy Policy</a> | 
-                <a href="#">Terms of Service</a> | 
+                <a href="#">Privacy Policy</a> |
+                <a href="#">Terms of Service</a> |
                 <a href="#">Support</a>
             </p>
         </div>
     </footer>
 </body>
+
 </html>
