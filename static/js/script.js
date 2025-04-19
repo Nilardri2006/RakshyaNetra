@@ -110,10 +110,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// Initialize Google Maps
+let map, directionsService, directionsRenderer;
+
 function initMap() {
     const mapElement = document.getElementById('safety-map');
-    const map = new google.maps.Map(mapElement, {
+    map = new google.maps.Map(mapElement, {
         center: { lat: 40.7128, lng: -74.0060 },
         zoom: 13,
         styles: [
@@ -125,27 +126,10 @@ function initMap() {
         ]
     });
 
-    // Fetch heatmap data from backend
-    fetch('/api/heatmap-data')
-        .then(response => response.json())
-        .then(safetyData => {
-            const heatmapData = safetyData.map(item => ({
-                location: new google.maps.LatLng(item.lat, item.lng),
-                weight: item.weight || 1
-            }));
-            const heatmap = new google.maps.visualization.HeatmapLayer({
-                data: heatmapData,
-                map: map,
-                radius: 50,
-                gradient: [
-                    'rgba(0, 255, 0, 0)',
-                    'rgba(0, 255, 0, 1)',
-                    'rgba(255, 255, 0, 1)',
-                    'rgba(255, 0, 0, 1)'
-                ]
-            });
-        });
+    directionsService = new google.maps.DirectionsService();
+    directionsRenderer = new google.maps.DirectionsRenderer({ map: map, suppressMarkers: false });
 
+    // Optionally, show user location
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             const userLocation = {
@@ -168,11 +152,58 @@ function initMap() {
             map.setCenter(userLocation);
         });
     }
+}
 
-    map.addListener('click', function (event) {
-        showReportIncidentForm({ lat: event.latLng.lat(), lng: event.latLng.lng() });
+// This function is called when the user clicks "Find Safest Route"
+async function calculateSafeRoute() {
+    const start = document.getElementById('start').value;
+    const end = document.getElementById('end').value;
+
+    if (!start || !end) {
+        alert('Please enter both start and end locations.');
+        return;
+    }
+
+    directionsService.route({
+        origin: start,
+        destination: end,
+        travelMode: 'WALKING',
+        provideRouteAlternatives: true
+    }, async function (response, status) {
+        if (status === 'OK') {
+            // Fetch incident data
+            const incidents = await fetch('/api/incidents').then(res => res.json());
+            // Score each route
+            const scoredRoutes = response.routes.map(route => {
+                let dangerScore = 0;
+                route.overview_path.forEach(point => {
+                    incidents.forEach(incident => {
+                        if (incident.location && isNear(point, incident.location, 0.002)) { // ~200m
+                            dangerScore += incident.severity || 1;
+                        }
+                    });
+                });
+                return { route, dangerScore };
+            });
+            // Find safest route (lowest dangerScore)
+            const safest = scoredRoutes.reduce((a, b) => a.dangerScore < b.dangerScore ? a : b);
+            directionsRenderer.setDirections({ routes: [safest.route] });
+
+            // Optionally, color safest route green and others red
+            // (Advanced: requires custom Polyline drawing, see Google Maps docs)
+        } else {
+            alert('Directions request failed due to ' + status);
+        }
     });
 }
+
+// Helper: check if point is near incident
+function isNear(point, incidentLocation, threshold) {
+    const latDiff = Math.abs(point.lat() - incidentLocation.lat);
+    const lngDiff = Math.abs(point.lng() - incidentLocation.lng);
+    return latDiff < threshold && lngDiff < threshold;
+}
+
 
 // Show modal and submit incident to backend
 function showReportIncidentForm(location) {

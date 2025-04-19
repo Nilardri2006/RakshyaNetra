@@ -3,112 +3,56 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safety Map - RakshyaNetra</title>
+    <title>Safety Map</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualization" defer></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
 </head>
+<header>
+    <div class="logo">
+        <h1><i class="fas fa-shield-alt"></i><a href="{{ url_for('home') }}">RakshyaNetra</a></h1>
+    </div>
+    <nav>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('safety_map') }}">Safety Map</a></li>
+            <li><a href="{{ url_for('report') }}">Report Incident</a></li>
+            <li><a href="{{ url_for('show_incidents') }}">View Reports</a></li>
+            <li><a href="{{ url_for('sos') }}">SOS</a></li>
+            <li><a href="{{ url_for('tips') }}">Safety Tips</a></li>
+            <li><a href="{{ url_for('community') }}">Community</a></li>
+        </ul>
+    </nav>
+</header>
 
 <body>
-    <header>
-        <div class="logo">
-            <h1><i class="fas fa-shield-alt"></i><a href="{{ url_for('home') }}">RakshyaNetra</a></h1>
-        </div>
-        <nav>
-            <div class="hamburger">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
-            <ul class="nav-links">
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('safety_map') }}">Safety Map</a></li>
-                <li><a href="{{ url_for('report') }}">Report Incident</a></li>
-                <li><a href="{{ url_for('show_incidents') }}">View Reports</a></li>
-                <li><a href="{{ url_for('sos') }}">SOS</a></li>
-                <li><a href="{{ url_for('tips') }}">Safety Tips</a></li>
-                <li><a href="{{ url_for('community') }}">Community</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="map-controls">
+        <input type="text" id="start" placeholder="Enter starting point">
+        <input type="text" id="end" placeholder="Enter destination">
+        <button onclick="calculateSafeRoute()" class="btn primary-btn">Find Safest Route</button>
+    </div>
+    <div id="safety-map" style="height: 500px;"></div>
 
-    <main>
-        <section class="page-header">
-            <h1>Safety Map</h1>
-            <p>View safe and unsafe areas to plan your routes more securely</p>
-        </section>
-
-        <section class="section-padding">
-            <div class="container">
-                <div class="map-controls">
-                    <div class="form-group">
-                        <label for="location-search">Search Location</label>
-                        <input type="text" id="location-search" class="form-control" placeholder="Enter a location">
-                    </div>
-                    <div class="form-group">
-                        <label for="time-filter">Time of Day</label>
-                        <select id="time-filter" class="form-control">
-                            <option value="all">All Times</option>
-                            <option value="day">Daytime (6AM-6PM)</option>
-                            <option value="night">Nighttime (6PM-6AM)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="incident-filter">Incident Type</label>
-                        <select id="incident-filter" class="form-control">
-                            <option value="all">All Incidents</option>
-                            <option value="harassment">Harassment</option>
-                            <option value="assault">Assault</option>
-                            <option value="stalking">Stalking</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <button class="btn primary-btn" id="apply-filters">Apply Filters</button>
-                </div>
-
-                <div id="safety-map"></div>
-
-                <div class="map-legend">
-                    <h3>Map Legend</h3>
-                    <div class="legend-item">
-                        <div class="color-box" style="background-color: rgba(0, 255, 0, 0.3);"></div>
-                        <span>Safe Area</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="color-box" style="background-color: rgba(255, 255, 0, 0.3);"></div>
-                        <span>Moderate Risk</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="color-box" style="background-color: rgba(255, 0, 0, 0.3);"></div>
-                        <span>High Risk</span>
-                    </div>
-                </div>
-
-                <div class="map-info">
-                    <h3>About the Safety Map</h3>
-                    <p>This map shows reported incidents and safety levels based on community reports. Safe areas are
-                        shown in green, moderate risk areas in yellow, and high-risk areas in red.</p>
-                    <p>The data is anonymized and updated regularly. Remember that safety conditions can change, so
-                        always stay alert regardless of an area's designation.</p>
-                    <p>To contribute to the map, please <a href="report.html">report incidents</a> you've witnessed or
-                        experienced.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="cta">
-            <h2>Help Make Our Communities Safer</h2>
-            <p>Your reports contribute to a more accurate safety map for everyone.</p>
-            <a href="report.html" class="btn primary-btn">Report an Incident</a>
-        </section>
-    </main>
+    <div class="map-legend">
+        <div><span class="legend-safe"></span> Safest Route</div>
+        <div><span class="legend-risky"></span> Alternative Routes</div>
+        <div><span class="legend-incident"></span> Reported Incident</div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzSGr9a7g8BZ7Omt0oU26i-P32slA56zo&callback=initMap&libraries=directions">
+        </script>
 
     <footer>
         <div class="footer-content">
             <div class="footer-section about">
-                <h3><i class="fas fa-shield-alt"></i> RakshyaNetra</h3>
+                <h3><i class="fas fa-shield-alt"></i>RakshyaNetra</h3>
                 <p>A platform dedicated to improving women's safety through community-driven reporting, resources, and
                     support.</p>
                 <div class="social-links">
@@ -146,6 +90,8 @@
             </p>
         </div>
     </footer>
+
+
 </body>
 
 </html>

@@ -1,31 +1,35 @@
 /* Base Styling */
 :root {
     /* Primary Colors */
-    --primary-color: #4a6fa5;      /* Trustworthy Blue */
+    --primary-color: #4a6fa5;
+    /* Trustworthy Blue */
     --primary-dark: #345281;
     --primary-light: #6e8cbc;
-    
+
     /* Secondary Colors */
-    --secondary-color: #f8c7cc;    /* Soft Pink */
+    --secondary-color: #f8c7cc;
+    /* Soft Pink */
     --secondary-dark: #e7a2aa;
     --secondary-light: #fce3e6;
-    
+
     /* Accent Colors */
-    --accent-color: #7acca4;       /* Soothing Green */
+    --accent-color: #7acca4;
+    /* Soothing Green */
     --accent-dark: #5eae87;
     --accent-light: #9fdebb;
-    
+
     /* Emergency Color */
-    --emergency-color: #e63946;    /* Alert Red */
+    --emergency-color: #e63946;
+    /* Alert Red */
     --emergency-dark: #c5232f;
     --emergency-light: #f27179;
-    
+
     /* Neutral Colors */
     --dark: #2b2d42;
     --medium-dark: #8d99ae;
     --medium-light: #edf2f4;
     --light: #ffffff;
-    
+
     /* Fonts */
     --main-font: 'Nunito', sans-serif;
     --heading-font: 'Montserrat', sans-serif;
@@ -44,7 +48,12 @@ body {
     background-color: var(--medium-light);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--heading-font);
     margin-bottom: 1rem;
     line-height: 1.3;
@@ -117,9 +126,11 @@ a:hover {
     0% {
         box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.4);
     }
+
     70% {
         box-shadow: 0 0 0 10px rgba(230, 57, 70, 0);
     }
+
     100% {
         box-shadow: 0 0 0 0 rgba(230, 57, 70, 0);
     }
@@ -202,8 +213,8 @@ nav {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(43, 45, 66, 0.7), rgba(43, 45, 66, 0.7)), 
-                url('https://images.unsplash.com/photo-1573164574146-73b389589c63?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    background: linear-gradient(rgba(43, 45, 66, 0.7), rgba(43, 45, 66, 0.7)),
+        url('https://images.unsplash.com/photo-1573164574146-73b389589c63?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
     background-size: cover;
     background-position: center;
     color: var(--light);
@@ -369,8 +380,8 @@ nav {
 .cta {
     padding: 5rem 5%;
     text-align: center;
-    background: linear-gradient(rgba(74, 111, 165, 0.9), rgba(74, 111, 165, 0.9)), 
-                url('https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    background: linear-gradient(rgba(74, 111, 165, 0.9), rgba(74, 111, 165, 0.9)),
+        url('https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
     background-size: cover;
     background-position: center;
     color: var(--light);
@@ -494,7 +505,7 @@ footer {
     .hamburger {
         display: block;
     }
-    
+
     .nav-links {
         position: fixed;
         right: -100%;
@@ -509,33 +520,33 @@ footer {
         transition: right 0.5s ease;
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
     }
-    
+
     .nav-links.active {
         right: 0;
     }
-    
+
     .nav-links li {
         margin: 1.5rem 0;
     }
-    
+
     .hero h1 {
         font-size: 2.5rem;
     }
-    
+
     .hero-buttons {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .hero-buttons .btn {
         width: 100%;
         margin-bottom: 1rem;
     }
-    
+
     .testimonial {
         width: 100%;
     }
-    
+
     .footer-content {
         grid-template-columns: 1fr;
     }
@@ -610,6 +621,58 @@ textarea.form-control {
 }
 
 /* Map Styling */
+.map-controls {
+    margin: 20px auto;
+    display: flex;
+    gap: 10px;
+    max-width: 800px;
+}
+
+.map-controls input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.map-legend {
+    position: absolute;
+    bottom: 30px;
+    left: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+
+.map-legend div {
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+.legend-safe,
+.legend-risky,
+.legend-incident {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.legend-safe {
+    background: #00FF00;
+}
+
+.legend-risky {
+    background: #FF0000;
+}
+
+.legend-incident {
+    background: #FF0000;
+}
+
 #safety-map {
     height: 500px;
     width: 100%;
