@@ -1,0 +1,5 @@
+Flask
+gunicorn
+pymongo[srv]
+python-dotenv
+twilio
