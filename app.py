@@ -7,7 +7,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-client = MongoClient('localhost', 27017)
+MONGO_URI = os.getenv('MONGO_URI', 'mongodb://localhost:27017')
+client = MongoClient(MONGO_URI)
 db = client['womens_safety']
 
 # Twilio setup
